@@ -55,7 +55,7 @@ Run the following command.
 python . -s rice_root_daily_growth_intensity_normalized
 ```
 
-The rregistrated files are stored in the `.registrated` directory in `rice_root_daily_growth_intensity_normalized`.
+The registrated files are stored in the `.registrated` directory in `rice_root_daily_growth_intensity_normalized`.
 
 
 
