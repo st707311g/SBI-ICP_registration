@@ -1,0 +1,5 @@
+coloredlogs
+numpy
+open3d
+scikit-image
+tqdm
