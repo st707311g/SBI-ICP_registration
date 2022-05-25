@@ -57,8 +57,6 @@ python . -s rice_root_daily_growth_intensity_normalized
 
 The registrated files are stored in the `.registrated` directory in `rice_root_daily_growth_intensity_normalized`.
 
-
-
 The confirmed operating environments are shown below:
 
 Environment 1:
