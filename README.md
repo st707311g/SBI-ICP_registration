@@ -81,9 +81,11 @@ python RSAvis3D -s rice_root_daily_growth_intensity_normalized
 Processed files are saved in the `.segmentated` directory in `rice_root_daily_growth_intensity_normalized`.
 
 without SBI-ICP registration
+
 <img src="figures/without_SBI-ICP_registration.gif" width=60% height=60%>
 
 with SBI-ICP registration
+
 <img src="figures/with_SBI-ICP_registration.gif" width=60% height=60%>
 
 ## performance
