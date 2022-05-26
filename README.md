@@ -2,8 +2,8 @@
 
 ![python](https://img.shields.io/badge/Python-3.8.12-lightgreen)
 ![developed_by](https://img.shields.io/badge/developed%20by-Shota_Teramoto-lightgreen)
-![version](https://img.shields.io/badge/version-1.0-lightgreen)
-![last_updated](https://img.shields.io/badge/last_update-May_25,_2022-lightgreen)
+![version](https://img.shields.io/badge/version-1.1-lightgreen)
+![last_updated](https://img.shields.io/badge/last_update-May_26,_2022-lightgreen)
 
 ## introduction
 
@@ -19,14 +19,13 @@ Run the following commands:
 
 ```
 git clone https://github.com/st707311g/SBI-ICP_registration.git
-cd SBI-ICP_registration
 ```
 
 The following command will install the required packages.
 
 ```
 pip install -U pip
-pip install -r requirements.txt
+pip install -r SBI-ICP_registration/requirements.txt
 ```
 
 This software can reduce processing time by using `CuPy`. Installation depends on the version of `CUDA Toolkit`. Please build the environment according to your own version of `CUDA Toolkit`. For example, if the version of `CUDA Toolkit` is 11.4, install cupy with the following command.
@@ -37,25 +36,57 @@ pip install cupy-cuda114
 
 Please check if CuPy is available by using the following command.
 ```
-python is_cupy_available.py
+python SBI-ICP_registration/is_cupy_available.py
+```
+
+Install [RSAvis3D](https://github.com/st707311g/RSAvis3D) to verify the results of the demonstration.
+
+```
+git clone https://github.com/st707311g/RSAvis3D.git
+pip install -r RSAvis3D/requirements.txt
 ```
 
 ## demonstration
 
-Download the demo data (1.60G), which is a time-series X-ray CT data of an upland rice cultivar from 7 to 26 days after sowing ([Teramoto et al. 2020 Plant Methods](https://plantmethods.biomedcentral.com/articles/10.1186/s13007-020-00612-6)). The intensity of this data is normalized in the way described in [a github repository](https://github.com/st707311g/RSAvis3D).
+Download the demo data (1.60G), which is a time-series X-ray CT data of an upland rice cultivar from 7 to 27 days after sowing ([Teramoto et al. 2020 Plant Methods](https://plantmethods.biomedcentral.com/articles/10.1186/s13007-020-00612-6)). The intensity of this data is normalized in the way described in [RSAvis3D github repository](https://github.com/st707311g/RSAvis3D); CT slice images were converted into 8 bit jpeg files, signal intensity of the air is around 0 and signal intensity of the soil is around 128. SBI-ICP_registration detects segments with a signal intensity of 255 as a point cloud.
 
 ```
 wget https://rootomics.dna.affrc.go.jp/data/rice_root_daily_growth_intensity_normalized.zip
 unzip rice_root_daily_growth_intensity_normalized.zip
+rm rice_root_daily_growth_intensity_normalized.zip
 ```
 
-Run the following command.
+There are 21 directories in rice_root_daily_growth_intensity_normalized.
 
 ```
-python . -s rice_root_daily_growth_intensity_normalized
+ls rice_root_daily_growth_intensity_normalized
+> DAS07  DAS09  DAS11  DAS13  DAS15  DAS17  DAS19  DAS21  DAS23  DAS25  DAS27
+> DAS08  DAS10  DAS12  DAS14  DAS16  DAS18  DAS20  DAS22  DAS24  DAS26
+```
+
+Run the following command to perform SBI-ICP registration.
+
+```
+python SBI-ICP_registration -s rice_root_daily_growth_intensity_normalized
 ```
 
 The registrated files are stored in the `.registrated` directory in `rice_root_daily_growth_intensity_normalized`.
+
+To check the results, extract the RSA image using RSAvis3D. RSAvis3D automatically references the `.registered` directory.
+
+```
+python RSAvis3D -s rice_root_daily_growth_intensity_normalized
+```
+
+Processed files are saved in the `.segmentated` directory in `rice_root_daily_growth_intensity_normalized`.
+
+without SBI-ICP registration
+<img src="figures/without_SBI-ICP_registration.gif" width=60% height=60%>
+
+with SBI-ICP registration
+<img src="figures/with_SBI-ICP_registration.gif" width=60% height=60%>
+
+## performance
 
 The confirmed operating environments are shown below:
 
@@ -73,7 +104,7 @@ Environment 1:
     - scikit-image (0.19.2)
     - tqdm (4.64.0)
 
-Using CPU, the processing time for the demo files was 17 minutes. Using GPU, the processing time for the demo files was 6 minutes.
+Using CPU, the processing time of SBI-ICP registration for the demo files was 17 minutes. Using GPU, the processing time was 6 minutes.
 
 ## version policy
 
@@ -109,4 +140,5 @@ https://rootomics.dna.affrc.go.jp/en/
 * version 1.0 (May 25, 2022)
   * initial version uploaded
 
-
+* version 1.1 (May 26, 2022)
+  * readme updated (demo code added)
