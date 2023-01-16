@@ -2,8 +2,8 @@
 
 ![python](https://img.shields.io/badge/Python-3.8.12-lightgreen)
 ![developed_by](https://img.shields.io/badge/developed%20by-Shota_Teramoto-lightgreen)
-![version](https://img.shields.io/badge/version-1.1-lightgreen)
-![last_updated](https://img.shields.io/badge/last_update-May_26,_2022-lightgreen)
+![version](https://img.shields.io/badge/version-1.2-lightgreen)
+![last_updated](https://img.shields.io/badge/last_update-January_17,_2023-lightgreen)
 
 ## introduction
 
@@ -42,7 +42,7 @@ python SBI-ICP_registration/is_cupy_available.py
 Install [RSAvis3D](https://github.com/st707311g/RSAvis3D) to verify the results of the demonstration.
 
 ```
-git clone https://github.com/st707311g/RSAvis3D.git
+git clone https://github.com/st707311g/RSAvis3D.git -b 1.2
 pip install -r RSAvis3D/requirements.txt
 ```
 
@@ -148,3 +148,6 @@ https://rootomics.dna.affrc.go.jp/en/
 
 * version 1.1 (May 26, 2022)
   * readme updated (demo code added)
+  
+* version 1.2 (January 17, 2023)
+  * readme updated
